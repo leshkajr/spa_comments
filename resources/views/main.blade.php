@@ -32,5 +32,9 @@ Phasellus semper vel nibh non tincidunt. Curabitur interdum, nibh mattis tincidu
 @stop
 
 @section('footer')
-    @include('layouts.footer')
+    @include('layouts.footer-message')
+@stop
+
+@section('scripts')
+    <script src="{{ URL::asset('js/checkFile.js')}}"></script>
 @stop
