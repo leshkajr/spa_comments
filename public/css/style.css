@@ -5,6 +5,8 @@
     --bg: #eef3fa;
     --bg-1: #dde0ec;
     --bg-2: #d0d5e8;
+    --bg-3: #c4c9dc;
+    --bg-4: #a7aec3;
 
     --button-background-color: #73659d;
     --button-background-color-hover: #7b6fa0;
@@ -150,16 +152,34 @@ a{
     background-color: var(--bg-1);
     width: 100%;
 }
+.comment-container-right-side{
+    margin-left: 1%;
+    width: 14%;
+}
+.captcha-container{
+    margin-top: 7px;
+}
+.captcha-container>img{
+    border: 3px solid var(--button-background-color);
+    border-radius: 7px;
+}
 .button-send{
     border: 3px solid var(--button-background-color);
-    margin-left: 1%;
+    margin-top: 10px;
     border-radius: 15px;
+    height: 135px;
 }
-.button-send>svg{
+.button-send>button>svg{
     transition: 0.3s ease;
     cursor: pointer;
 }
-.button-send>svg:hover{
+.button-send>button>svg:hover{
     transform: scale(1.10);
     fill: var(--button-background-color-light);
+}
+
+.imagePreview>img{
+    border: 5px solid var(--bg-4);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
