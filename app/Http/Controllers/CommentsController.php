@@ -19,7 +19,7 @@ class CommentsController extends Controller
 //        } else {
 //            echo '<p style="color: #00ff30;">Matched :)</p>';
 //        }
-        $this->validate();
+        $this->validate($request, $request->rules());
         return $request->all();
     }
 }

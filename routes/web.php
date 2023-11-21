@@ -14,5 +14,5 @@ use App\Http\Controllers\CommentsController;
 |
 */
 
-Route::get('/', [CommentsController::class,"index"])->name('main');
-Route::post('/', [CommentsController::class,"store"])->name('main-post');
+Route::get('/', [CommentsController::class,"index"])->middleware(['web'])->name('main');
+Route::post('/', [CommentsController::class,"store"])->middleware(['web'])->name('main-post');

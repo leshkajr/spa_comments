@@ -1,8 +1,16 @@
-<?php include($_SERVER['DOCUMENT_ROOT'].'/php/captcha.php') ?>
+{{--<?php include($_SERVER['DOCUMENT_ROOT'].'/php/captcha.php') ?>--}}
 <div class="footer">
-    <form action="{{ route("main-post") }}" method="POST" class="main-form-add-comment">
+    <div class="d-flex justify-content-end w-100">
+        <div class="mb-1" style="margin-right: 70px; margin-top: 10px;">
+            <button onclick="collapseFooter('form-footer');">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <form action="{{ route("main-post") }}" method="POST" class="main-form-add-comment visible" id="form-footer">
         @csrf
-
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible mb-2 fade show" role="alert">
                 <ul style="list-style-type: none; margin-bottom: 0">
@@ -47,7 +55,9 @@
                     onchange="uploadFile();">
                 </div>
                 <div>
-                    <div id="imagePreview" class="imagePreview"></div>
+                    <div id="imagePreview" class="imagePreview">
+
+                    </div>
                 </div>
                 <div>
                     <textarea class="form-control @error('comment') is-invalid @enderror" style="height: 100px;" name="comment"

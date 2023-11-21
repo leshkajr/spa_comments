@@ -37,4 +37,5 @@ Phasellus semper vel nibh non tincidunt. Curabitur interdum, nibh mattis tincidu
 
 @section('scripts')
     <script src="{{ URL::asset('js/checkFile.js')}}"></script>
+    <script src="{{ URL::asset('js/animation.js')}}"></script>
 @stop
