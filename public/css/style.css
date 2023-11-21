@@ -89,8 +89,19 @@ a{
     padding: 20px 30px;
 }
 .main-form-add-comment{
-    padding: 40px 60px 40px 60px;
+    padding: 7px 60px 40px 60px;
     margin: 0;
+}
+.hidden {
+    height: 0;
+    display: none;
+    overflow: hidden;
+    transition: height 0.5s ease-out;
+}
+
+.visible {
+    height: 100%;
+    display: block;
 }
 
 .list-comments{
@@ -178,7 +189,7 @@ a{
     fill: var(--button-background-color-light);
 }
 
-.imagePreview>img{
+.imagePreview>a>img{
     border: 5px solid var(--bg-4);
     border-radius: 10px;
     margin-bottom: 20px;
