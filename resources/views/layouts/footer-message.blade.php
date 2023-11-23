@@ -17,7 +17,7 @@
                     @foreach ($errors->all() as $error)
                         <li>
 {{--                            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>--}}
-                            {{ $error }}
+                            {!! $error !!}
                         </li>
                     @endforeach
                 </ul>
@@ -59,9 +59,20 @@
 
                     </div>
                 </div>
-                <div>
-                    <textarea class="form-control @error('comment') is-invalid @enderror" style="height: 100px;" name="comment"
-                              id="text" aria-describedby="homepageHelp" placeholder="Your comment"></textarea>
+                <div class="mb-3">
+{{--                    <textarea class="form-control @error('comment') is-invalid @enderror" style="height: 100px;" name="comment"--}}
+{{--                              id="comment" aria-describedby="homepageHelp" placeholder="Your comment"></textarea>--}}
+{{--                    <div contenteditable="true" class="form-control" id="comment" style="height: 70px;">--}}
+{{--                    </div>--}}
+                    <div id="comment" contenteditable="true" class="form-control mb-1" style="height: 100px;"></div>
+                    <div id="evalResult"></div>
+                </div>
+                <div class="d-flex flex-row gap-2">
+                    <div class="form-text" style="font-size: 15px;">You can use this tags: </div>
+                    <button type="button" class="button button-tags" onclick="addTag('a');">a</button>
+                    <button type="button" class="button button-tags" onclick="addTag('code');">code</button>
+                    <button type="button" class="button button-tags" onclick="addTag('i');">i</button>
+                    <button type="button" class="button button-tags" onclick="addTag('strong');">strong</button>
                 </div>
             </div>
             <div class="d-flex flex-column comment-container-right-side">

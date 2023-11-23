@@ -194,3 +194,11 @@ a{
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+.button-tags{
+    padding:3px 12px;
+    font-size: 15px;
+}
+.highlight {
+    color: red;
+}
