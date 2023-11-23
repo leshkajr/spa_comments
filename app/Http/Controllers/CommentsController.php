@@ -11,15 +11,9 @@ class CommentsController extends Controller
         return view('main');
     }
 
-    function store(CommentRequest $request){
-//        $rules = ['captcha' => 'required|captcha'];
-//        $validator = validator()->make(request()->all(), $rules);
-//        if ($validator->fails()) {
-//            echo '<p style="color: #ff0000;">Incorrect!</p>';
-//        } else {
-//            echo '<p style="color: #00ff30;">Matched :)</p>';
-//        }
-        $this->validate($request, $request->rules());
+    function store(Request $request){
+        $commentRequest = new CommentRequest();
+        $this->validate($request, $commentRequest->rules(), $commentRequest->messages());
         return $request->all();
     }
 }

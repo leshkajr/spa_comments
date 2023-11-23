@@ -476,10 +476,10 @@ class Captcha
         $sensitive = $this->session->get('captcha.sensitive');
         $encrypt = $this->session->get('captcha.encrypt');
 
-//        if (!Cache::pull($this->get_cache_key($key))) {
-//            $this->session->remove('captcha');
-//            return false;
-//        }
+        if (!Cache::pull($this->get_cache_key($key))) {
+            $this->session->remove('captcha');
+            return false;
+        }
 
         if (!$sensitive) {
             $value = $this->str->lower($value);
