@@ -23,17 +23,17 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'captcha' => 'required|captcha',
-//            'username' => 'required|alpha_num:ascii',
-//            'email' => 'required|email',
+            'captcha' => 'required|captcha',
+            'username' => 'required|alpha_num:ascii',
+            'email' => 'required|email',
             'comment' => 'required|html',
-//            'urlHomePage' => 'url',
+            'urlHomePage' => 'url',
         ];
     }
 
     public function messages()
     {
         return ['captcha' => 'Invalid captcha',
-            'comment' => "Your code doesn't follow the tags rules. Please use only this tags: <b>a[href|title],code,i,strong</b>. And don`t remember <b>close tags</b>"];
+            'html' => "Your code doesn't follow the tags rules. Please use only this tags: <b>a[href|title],code,i,strong</b>. And don`t remember <b>close tags</b>"];
     }
 }

@@ -14,6 +14,7 @@ class CommentsController extends Controller
     function store(Request $request){
         $commentRequest = new CommentRequest();
         $this->validate($request, $commentRequest->rules(), $commentRequest->messages());
-        return $request->all();
+
+        echo "Welcome " . $request->input('username');
     }
 }
