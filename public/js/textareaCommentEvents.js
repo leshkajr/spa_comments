@@ -1,60 +1,115 @@
-var commentDiv = document.getElementById('comment');
+var textarea = document.getElementById('comment');
 var tmp = document.getElementById('homepage');
 
-var savedRange;
+function getCursorPosition(el) {
+    var pos = 0;
 
-function saveCursorPosition() {
-    var selection = window.getSelection();
-    if (selection.rangeCount > 0) {
-        savedRange = selection.getRangeAt(0).cloneRange();
+    if ('selectionStart' in el) {
+        pos = el.selectionStart;
+    } else if ('selection' in document) {
+        el.focus();
+        var Sel = document.selection.createRange();
+        var SelLength = document.selection.createRange().text.length;
+        Sel.moveStart('character', -el.value.length);
+        pos = Sel.text.length - SelLength;
     }
+
+    return pos;
 }
 
-function restoreCursorPosition() {
-    if (savedRange) {
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(savedRange);
+function selectRange(el, start, end) {
+    if (end === undefined) {
+        end = start;
+    }
+
+    if ('selectionStart' in el) {
+        el.selectionStart = start;
+        el.selectionEnd = end;
+    } else if (el.setSelectionRange) {
+        el.setSelectionRange(start, end);
+    } else if (el.createTextRange) {
+        var range = el.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', end);
+        range.moveStart('character', start);
+        range.select();
     }
 }
+const forbiddenTags = ['div', 'input', 'select', 'textarea', 'button','pre','h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p' ,'hr' , 'br'];
+textarea.addEventListener('focus', function () {
+    sessionStorage.cursorPosition = getCursorPosition(textarea);
+});
+textarea.addEventListener('input', function () {
+    // let cursorPosition = getCursorPosition(textarea);
+    // sessionStorage.cursorPosition = cursorPosition;
 
-commentDiv.addEventListener('input', function () {
-    saveCursorPosition();
+    let text = textarea.value;
+    let checkResult = document.getElementById('checkResult');
+    checkResult.innerText = '';
 
-    var editableDiv = commentDiv;
-    var text = editableDiv.innerHTML;
-
-    text = text.replace(/<span class="highlight">/g, '');
-    text = text.replace(/<\/span>/g, '');
-
-    text = text.replace(/&lt;a&gt;/g, '<span class="highlight">&lt;a&gt;</span><span class="highlight">');
-    text = text.replace(/&lt;\/a&gt;/g, '</span><span class="highlight">&lt;/a&gt;</span>');
-
-    text = text.replace(/&lt;code&gt;/g, '<span class="highlight">&lt;code&gt;</span><span class="highlight">');
-    text = text.replace(/&lt;\/code&gt;/g, '</span><span class="highlight">&lt;/code&gt;</span>');
-
-    text = text.replace(/&lt;i&gt;/g, '<span class="highlight">&lt;i&gt;</span><span class="highlight">');
-    text = text.replace(/&lt;\/i&gt;/g, '</span><span class="highlight">&lt;/i&gt;</span>');
-
-    text = text.replace(/&lt;strong&gt;/g, '<span class="highlight">&lt;strong&gt;</span><span class="highlight">');
-    text = text.replace(/&lt;\/strong&gt;/g, '</span><span class="highlight">&lt;/strong&gt;</span>');
-
-    editableDiv.innerHTML = text;
-
-    restoreCursorPosition();
-
-    try {
-        var result = eval(text);
-
-        // Отобразить результат
-        document.getElementById('evalResult').innerText = 'Результат:\n' + result;
-    } catch (error) {
-        // В случае ошибки отобразить сообщение об ошибке
-        document.getElementById('evalResult').innerText = 'Ошибка:\n' + error.message;
+    let isError = false;
+    forbiddenTags.forEach((element) => {
+        let tag = '<' + element + '>';
+        let tagClose = '</' + element + '>';
+        if(text.includes(tag) || text.includes(tagClose)){
+            checkResult.innerText += tag + ' is forbidden tag';
+            checkResult.innerHTML += '<br>';
+            isError = true;
+        }
+    });
+    if(isError){
+        textarea.classList.add('is-invalid');
     }
+
+    let invisibleBlock = document.getElementById('invisibleBlock');
+    invisibleBlock.innerHTML = text;
+    let isError2 = false;
+    for (let elementsByClassNameElement of invisibleBlock.querySelectorAll("*")) {
+        console.log(elementsByClassNameElement.tagName);
+        if(elementsByClassNameElement.tagName === 'A'){
+            for (let attributes of elementsByClassNameElement.attributes){
+                if(attributes.name === 'href' || attributes.name === 'title'){
+                    isError2 = false
+                }
+                else{
+                    isError2 = true
+                }
+            }
+        }
+    }
+    if(isError2){
+        checkResult.innerText += ' Allowed attributes for <a>: "href", "title"';
+        checkResult.innerHTML += '<br>';
+        textarea.classList.add('is-invalid');
+    }
+
+    if(isError === false && isError2 === false) {
+        textarea.classList.remove('is-invalid');
+    }
+    // editableDiv.value = text;
+
+    // selectRange(textarea, sessionStorage.cursorPosition);
+
 });
 
-
 function addTag(tag){
-
+    let leftSideText = textarea.value.substring(0,getCursorPosition(textarea));
+    let rightSideText = textarea.value.substring(getCursorPosition(textarea), textarea.value.length);
+    let middleText;
+    if(tag === 'a'){
+        middleText = '<a></a>'
+    }
+    else if(tag === 'code'){
+        middleText = '<code></code>'
+    }
+    else if(tag === 'i'){
+        middleText = '<i></i>'
+    }
+    else if(tag === 'strong'){
+        middleText = '<strong></strong>'
+    }
+    textarea.value =  leftSideText + middleText + rightSideText;
+    textarea.focus();
 }
+
+
