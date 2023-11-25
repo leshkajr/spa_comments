@@ -39,4 +39,6 @@ Phasellus semper vel nibh non tincidunt. Curabitur interdum, nibh mattis tincidu
     <script src="{{ URL::asset('js/checkFile.js')}}"></script>
     <script src="{{ URL::asset('js/animation.js')}}"></script>
     <script src="{{ URL::asset('js/textareaCommentEvents.js')}}"></script>
+    <script src="{{ URL::asset('js/sendComment.js')}}"></script>
+    <script src="{{ URL::asset('js/inputChanges.js')}}"></script>
 @stop
