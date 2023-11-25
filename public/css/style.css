@@ -200,5 +200,8 @@ a{
     font-size: 15px;
 }
 .highlight {
-    color: red;
+    color: #d73f3f;
+}
+.check-result{
+    color: #d73f3f;
 }
