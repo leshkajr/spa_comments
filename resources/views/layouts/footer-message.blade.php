@@ -76,12 +76,19 @@
                     <div id="checkResult" class="check-result mt-2"></div>
                     <div id="invisibleBlock" style="display: none"></div>
                 </div>
-                <div class="d-flex flex-row gap-2">
-                    <div class="form-text under_error" style="font-size: 15px;">You can use this tags: </div>
-                    <button type="button" class="button button-tags" onclick="addTag('a');">a</button>
-                    <button type="button" class="button button-tags" onclick="addTag('code');">code</button>
-                    <button type="button" class="button button-tags" onclick="addTag('i');">i</button>
-                    <button type="button" class="button button-tags" onclick="addTag('strong');">strong</button>
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-row gap-2" style="width: 50%">
+                        <div class="form-text under_error" style="font-size: 15px;">You can use this tags: </div>
+                        <button type="button" class="button button-tags" onclick="addTag('a');">a</button>
+                        <button type="button" class="button button-tags" onclick="addTag('code');">code</button>
+                        <button type="button" class="button button-tags" onclick="addTag('i');">i</button>
+                        <button type="button" class="button button-tags" onclick="addTag('strong');">strong</button>
+                    </div>
+                    <div class="d-flex flex-row-reverse" style="width: 50%">
+                        <button class="button" type="button" id="preview-button">Pre-view message</button>
+                        <button class="button" type="button" style="display: none;" id="close-preview-button">Close pre-view</button>
+                        <button class="button me-2" type="button" style="display: none;" id="refresh-preview-button">Refresh pre-view</button>
+                    </div>
                 </div>
             </div>
             <div class="d-flex flex-column comment-container-right-side">
@@ -102,6 +109,27 @@
                 </div>
             </div>
         </div>
+            <div>
+                <div class="pre-view_comment comment" id="preview-comment-container">
+                    <div class="d-flex flex-row align-items-center
+                     comment-title-container">
+                        <div class="img-ava">
+                            <img src="https://img.freepik.com/premium-vector/purple-circle-with-white-person-icon_876006-6.jpg"/>
+                        </div>
+                        <div class="title-name" id="username-preview">
+                        </div>
+                        <div class="title-timestamp" id="timestamp-preview">22.05.22 в 23:23</div>
+                        <div class="title-review-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="imagePreview-preview" class="imagePreview" style="margin-bottom: 20px;">
+
+                    </div>
+                    <div class="text-comment" id="comment-preview"></div>
+            </div>
         </div>
     </form>
 </div>

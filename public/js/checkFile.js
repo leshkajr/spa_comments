@@ -30,10 +30,10 @@ function uploadFile() {
 
                     var resizedImage = canvas.toDataURL(fileType);
                     console.log(resizedImage);
-                    previewImage(resizedImage);
+                    previewImage('imagePreview',resizedImage);
                 } else {
                     console.log('Original Image:', img.src);
-                    previewImage(img.src);
+                    previewImage('imagePreview',img.src);
                 }
             };
         }
@@ -53,8 +53,8 @@ function uploadFile() {
 }
 
 
-function previewImage(src) {
-    var previewDiv = document.getElementById('imagePreview');
+function previewImage(divContainer,src) {
+    var previewDiv = document.getElementById(divContainer);
     previewDiv.innerHTML = '';
 
     var linkPreviewImage = document.createElement('a');

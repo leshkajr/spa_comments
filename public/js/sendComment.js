@@ -4,23 +4,34 @@ $(document).ready(function(){
         var email = $("#email").val();
         var homepage = $("#homepage").val();
         var captcha = $("#captcha").val();
-        var attachmentFiles = $("#attachmentFiles").val();
+        var attachmentFiles = document.getElementById('attachmentFiles').files[0];
+        console.log(attachmentFiles);
+        console.log(document.getElementById('attachmentFiles'));
         var comment = $("#comment").val();
-        var token = $("#token").val();
+        // var token = $("#token").val();
         var url = "sendComment";
+
         console.log("click");
+
+        let fd = new FormData();
+        fd.append('username',username);
+        fd.append('email',email);
+        fd.append('homepage',homepage);
+        fd.append('captcha',captcha);
+        fd.append('comment',comment);
+        fd.append('attachmentFiles',attachmentFiles);
+        console.log(fd);
         $.ajax({
             type: "post",
-            url: url,
-            data: {
-                username: username,
-                email: email,
-                homepage: homepage,
-                captcha: captcha,
-                comment: comment,
-                _token: token
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            dataType: 'json or text',
+            url: url,
+            data: fd,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            async: true,
             success: function(data){
                 $('#success_message').fadeIn().html(data);
                 console.log(data);
@@ -47,6 +58,7 @@ $(document).ready(function(){
                 }
                 else{
                     console.log(err);
+                    $('#success_message').fadeIn().html(err.responseText);
                 }
                 refreshCaptcha();
             }

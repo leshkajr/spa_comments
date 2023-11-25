@@ -22,6 +22,11 @@
                             </svg>
                         </div>
                     </div>
+                    <div>
+{{--                        <div id="imagePreview" class="imagePreview">--}}
+
+{{--                        </div>--}}
+                    </div>
                     <div class="text-comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit convallis tempus. Curabitur ut velit id odio malesuada consequat id in lacus. Donec vestibulum, sapien nec suscipit vestibulum, turpis urna posuere ipsum, sit amet sagittis lacus sem sed felis. Etiam at finibus odio, sed pellentesque leo. Vestibulum luctus facilisis quam et commodo. Sed vestibulum at lorem id fermentum. Nam dictum sit amet mi rutrum lobortis. Sed at purus feugiat, finibus diam eget, eleifend sapien.
 
 Phasellus semper vel nibh non tincidunt. Curabitur interdum, nibh mattis tincidunt blandit, ex nunc consectetur nulla, eu placerat leo velit quis orci. In dapibus justo a sapien ullamcorper tristique. Morbi sed dictum augue, a varius sem. Donec at tincidunt quam. Cras pulvinar, sapien laoreet lobortis aliquam, quam nibh pharetra urna, ultrices pulvinar elit justo sed felis. Donec eu mi ullamcorper, dapibus metus a, bibendum libero.</div>
@@ -41,4 +46,5 @@ Phasellus semper vel nibh non tincidunt. Curabitur interdum, nibh mattis tincidu
     <script src="{{ URL::asset('js/textareaCommentEvents.js')}}"></script>
     <script src="{{ URL::asset('js/sendComment.js')}}"></script>
     <script src="{{ URL::asset('js/inputChanges.js')}}"></script>
+    <script src="{{ URL::asset('js/previewComment.js')}}"></script>
 @stop

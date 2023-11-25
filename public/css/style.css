@@ -115,6 +115,7 @@ a{
 .comment-title-container{
     background-color: var(--bg-1);
     padding: 12px 15px;
+    margin-bottom: 20px;
 }
 .img-ava{
     border-radius: 50%;
@@ -141,7 +142,6 @@ a{
 .text-comment{
     font-family: 'Poppins', sans-serif;
     white-space: pre-wrap;
-    margin-top: 25px;
     font-size: 15px;
 
 
@@ -158,10 +158,11 @@ a{
 
 
 .footer{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     background-color: var(--bg-1);
     width: 100%;
+    overflow-y: auto;
 }
 .comment-container-right-side{
     margin-left: 1%;
@@ -204,4 +205,10 @@ a{
 }
 .check-result{
     color: #d73f3f;
+}
+.pre-view_comment{
+    display: none;
+    background-color: var(--bg);
+    padding: 10px;
+    margin-top: 20px;
 }

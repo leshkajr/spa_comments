@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-//            $table->string('userId');
-            $table->string('text');
+            $table->string('username');
+            $table->string('email');
+            $table->string('homepage');
+            $table->string('comment',6000);
+            $table->string('pathImage',1280);
             $table->boolean('isMain');
-            $table->unsignedInteger('numberInCascade');
-            $table->unsignedInteger('idMainComment');
+            $table->unsignedInteger('numberInCascade')->nullable();
+            $table->unsignedInteger('idMainComment')->nullable();
             $table->timestamps();
         });
     }
