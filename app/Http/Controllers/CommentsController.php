@@ -12,7 +12,8 @@ use League\Flysystem\Visibility;
 class CommentsController extends Controller
 {
     function index(){
-        return view('main');
+        $comments = Comment::all();
+        return view('main',['comments'=> $comments]);
     }
 
     function store(Request $request){
@@ -25,18 +26,25 @@ class CommentsController extends Controller
             'homepage' => $request->input('homepage'),
             'comment' => $request->input('comment'),
         ];
-        Log::debug($_FILES["attachmentFiles"]);
         if (isset($_FILES["attachmentFiles"])) {
             Log::debug("Enter to upload attachments");
             $file = $request->file('attachmentFiles');
             $generatedName = $file->hashName();
             $comment['pathImage'] = 'storage/images/photos/'.$generatedName;
-            Storage::putFile('storage/images/photos/',$file,$generatedName);
-//            Storage::setVisibility('public/images/photos/' . $generatedName, Visibility::PUBLIC);
+            Storage::putFileAs('public/images/photos/',$file,$generatedName);
         }
-        Log::debug("Comment",$comment);
-        $response["success"] = true;
+        $comment['isMain'] = true;
+//        Log::debug("Comment",$comment);
+
+
+        $id = Comment::create($comment);
+        Log::debug("Id: ".$id);
+        if($id !== null){
+            $response["success"] = true;
+        }
+        else {
+            $response["success"] = false;
+        }
         return $response;
-//        Comment::create();
     }
 }
