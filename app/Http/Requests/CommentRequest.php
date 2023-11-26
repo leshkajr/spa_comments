@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'captcha' => 'required|captcha',
-            'username' => 'required|alpha_num:ascii',
+            'username' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'email' => 'required|email',
             'comment' => 'required|html',
             'urlHomePage' => 'url',

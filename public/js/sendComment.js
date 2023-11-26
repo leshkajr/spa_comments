@@ -1,6 +1,9 @@
 $(document).ready(function(){
     $("#submit").click(function() {
         var username = $("#username").val();
+        var inputIsMain = $("#inputIsMain").val();
+        var inputIdMain = $("#inputIdMain").val();
+        var inputIdPreviewComment = $("#inputIdPreviewComment").val();
         var email = $("#email").val();
         var homepage = $("#homepage").val();
         var captcha = $("#captcha").val();
@@ -12,9 +15,14 @@ $(document).ready(function(){
         var url = "sendComment";
 
         console.log("click");
+        document.getElementById('captchaError').innerHTML = '';
+        document.getElementById('captcha').classList.remove('is-invalid');
 
         let fd = new FormData();
         fd.append('username',username);
+        fd.append('inputIsMain',inputIsMain);
+        fd.append('inputIdMain',inputIdMain);
+        fd.append('inputIdPreviewComment',inputIdPreviewComment);
         fd.append('email',email);
         fd.append('homepage',homepage);
         fd.append('captcha',captcha);
@@ -35,6 +43,7 @@ $(document).ready(function(){
             success: function(data){
                 $('#success_message').fadeIn().html(data);
                 console.log(data);
+                location.reload();
                 refreshCaptcha();
             },
             error: function (err) {
@@ -55,6 +64,9 @@ $(document).ready(function(){
                         el2.addClass('is-invalid');
                         el.html('<span style="color: red; margin-top: 6px;">'+error[0]+'</span>');
                     });
+                }
+                else if(err.status === 4){
+                    location.reload();
                 }
                 else{
                     console.log(err);

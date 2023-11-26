@@ -12,7 +12,16 @@ use League\Flysystem\Visibility;
 class CommentsController extends Controller
 {
     function index(){
-        $comments = Comment::all();
+        $comments = array();
+        $mainComments = Comment::where('isMain',1)->get();
+        foreach($mainComments as $mainComment){
+            $reviewComments = Comment::where('idMainComment',$mainComment->id)->orderBy('numberInCascade')->get();
+            $comments[] = $mainComment;
+            foreach ($reviewComments as $reviewComment){
+                $comments[] = $reviewComment;
+            }
+        }
+
         return view('main',['comments'=> $comments]);
     }
 
@@ -33,12 +42,24 @@ class CommentsController extends Controller
             $comment['pathImage'] = 'storage/images/photos/'.$generatedName;
             Storage::putFileAs('public/images/photos/',$file,$generatedName);
         }
-        $comment['isMain'] = true;
-//        Log::debug("Comment",$comment);
+//        Log::debug("inputIsMain: ".$request->input('inputIsMain'));
+//        Log::debug("inputIdMain: ".$request->input('inputIdMain'));
+        if($request->input('inputIsMain') === 'false'){
+            $id_main_comment = $request->input('inputIdMain');
+            $id_preview_comment = $request->input('inputIdPreviewComment');
+            $comment['isMain'] = false;
+            $comment['numberInCascade'] = Comment::where('id',$id_preview_comment)->get()[0]->numberInCascade + 1;
+            $comment['idMainComment'] = (int)$id_main_comment;
+        }
+        else{
+            $comment['isMain'] = true;
+            $comment['numberInCascade'] = 0;
+        }
+        Log::debug("Comment",$comment);
 
 
         $id = Comment::create($comment);
-        Log::debug("Id: ".$id);
+        Log::debug("Created comment: ".$id);
         if($id !== null){
             $response["success"] = true;
         }
