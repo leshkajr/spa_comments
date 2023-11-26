@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('email');
-            $table->string('homepage');
+            $table->string('homepage')->nullable();
             $table->string('comment',6000);
-            $table->string('pathImage',1280);
+            $table->string('pathImage',1280)->nullable();
             $table->boolean('isMain');
             $table->unsignedInteger('numberInCascade')->nullable();
             $table->unsignedInteger('idMainComment')->nullable();
+            $table->unsignedInteger('inputIdPreviewComment')->nullable();
             $table->timestamps();
         });
     }
