@@ -9,11 +9,31 @@
             </button>
         </div>
     </div>
+    <div class="container-show-review-comment" id="container-show-review-comment">
+        <div class="title-review-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
+            </svg>
+
+            <button type="button" class="ms-3" onclick="deleteReview();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                </svg>
+            </button>
+        </div>
+        <div style="margin-left: 25px; margin-top: 5px;">
+            <div id="review-comment-username" class="review-title-name"></div>
+            <div id="review-comment-comment" class="review-title-comment"></div>
+        </div>
+    </div>
     <form action="{{ route("main-post") }}" method="POST" class="main-form-add-comment visible" id="form-footer">
         <div id="success_message">
 
         </div>
         <input type="hidden" id="token" value="{{ csrf_token() }}">
+        <input type="hidden" id="inputIdPreviewComment" value="null">
+        <input type="hidden" id="inputIdMain" value="null">
+        <input type="hidden" id="inputIsMain" value="true">
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible mb-2 fade show" role="alert">
                 <ul style="list-style-type: none; margin-bottom: 0">
