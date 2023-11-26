@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" /> {{-- fancybox --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+    <script src="{{ URL::asset('js/checkFile.js')}}"></script>
 </head>
 <body style="background-color: var(--bg);">
 
