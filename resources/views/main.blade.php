@@ -32,6 +32,14 @@
                                 </svg>
                             </div>
                         </div>
+                        @if($comment->isMain === 0)
+                            <div class="sm-v-review-comment d-flex flex-row align-items-center">
+                                <div class="review-hr"></div>
+                                <div class="text">
+                                    {!! str_replace(PHP_EOL,' ',substr($comment->reviewComment->comment,0,50)) !!}
+                                </div>
+                            </div>
+                        @endif
                         @if($comment->pathImage !== null)
                             <div>
                                 <div id="imagePreview{{ $comment->id }}" class="imagePreview">
@@ -42,6 +50,16 @@
                         <div class="text-comment">{!! $comment->comment !!}</div>
                     </div>
                 @endforeach
+            </div>
+
+            <div>
+                <nav aria-label="Page navigation" class="d-flex justify-content-center" style="margin-bottom: 30px;">
+                    <ul class="pagination">
+                        @for($i = 1; $i <= $countPages; $i++)
+                            <li class="page-item"><a class="page-link" href="{{ route('main-comments',$i) }}">{{ $i }}</a></li>
+                        @endfor
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
