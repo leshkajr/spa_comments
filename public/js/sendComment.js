@@ -12,7 +12,7 @@ $(document).ready(function(){
         console.log(document.getElementById('attachmentFiles'));
         var comment = $("#comment").val();
         // var token = $("#token").val();
-        var url = "sendComment";
+        var url = "../sendComment";
 
         console.log("click");
         document.getElementById('captchaError').innerHTML = '';
